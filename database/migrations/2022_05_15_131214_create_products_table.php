@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('unit');
-            $table->string('price');
-            $table->string('quantity');
+            $table->string('unit')->nullable();
+            $table->double('price',82)->nullable();
+            $table->integer('quantity')->nullable();
+            $table->unsignedBigInteger('Catagory_id')->foreign('Catagory_id')->references('id')->On('catagories')->OnDelete('cascade');
 
         });
     }
@@ -33,4 +34,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('products');
     }
-};
+}
